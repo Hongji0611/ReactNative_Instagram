@@ -4,6 +4,18 @@ const styles = StyleSheet.create({
     container:{
         margin: 5,
     },
+    iconContainer:{
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        padding: 5,
+        alignItems: 'center',
+    },
+    leftIcons:{
+        flexDirection: "row",
+        width: 110,
+        justifyContent: 'space-between',
+
+    },
     likes:{
         fontWeight: "bold",
         margin:3,
