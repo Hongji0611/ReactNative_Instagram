@@ -5,6 +5,7 @@ import Stories from '../Stories/index';
 
 const data = [
     {
+        id: 1,
         user: {
             imageUri: 'https://img.hankyung.com/photo/201608/BF.12343403.1.jpg',
             name: '정선아'
@@ -15,6 +16,7 @@ const data = [
         postedAt: '6 miutes ago',
     },
     {
+        id: 2,
         user: {
             imageUri: 'https://img.hankyung.com/photo/201608/BF.12343403.1.jpg',
             name: '정선아'
@@ -25,6 +27,7 @@ const data = [
         postedAt: '6 miutes ago',
     },
     {
+        id: 3,
         user: {
             imageUri: 'https://img.hankyung.com/photo/201608/BF.12343403.1.jpg',
             name: '정선아'
@@ -41,6 +44,7 @@ const Feed = () => {
         <FlatList
             data={data}
             ListHeaderComponent={Stories}
+            keyExtractor={({id}) => id}
             renderItem={({ item }) => <Post post={item} />}
         />
     );

@@ -1,124 +1,114 @@
 
 import React from 'react';
-import HomeScreen from './Components/HomeScreen'
+// import 'react-native-gesture-handler';
+import HomeScreen from './Components/HomeScreen';
+import DiscoveryScreen from './Components/DiscoveryScreen';
+import CreatePostScreen from './Components/CreatePostScreen';
+import NotificationScreen from './Components/NotificationScreen';
+import ProfileScreen from './Components/ProfileScreen';
+import logo from './Components/assets/images/logo.png';
 
 import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
+  Image
 } from 'react-native';
+import { getFocusedRouteNameFromRoute, NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from '@react-navigation/stack';
 
+const Tab = createBottomTabNavigator();
+
+const HomeStack = createStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen 
+        name="Home" 
+        component={HomeScreen}
+        options={{
+          title:"Instagram",
+          headerStyle: { },
+          headerLeft: () => (
+              <Ionicons name="camera-outline" size={30} color={"#000"} style={{marginLeft: 10}}/>
+          ),
+          headerTitle: () => (
+            <Image source={logo} resizeMode="contain" style= {{ alignSelf: 'center', width: 135, marginTop: 10 }} />
+            // <Ionicons name="paper-plane-outline" size={30} color={"#000"} style={{marginRight: 10}}/>
+            ),
+          headerRight: () => (
+            <Ionicons name="paper-plane-outline" size={30} color={"#000"} style={{marginRight: 10}}/>
+          )
+        }}
+        />
+    </HomeStack.Navigator>
+  );
+}
+
+const ProfileStack = createStackNavigator();
+
+function ProfileStackScreen() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen 
+        name="Home" 
+        component={HomeScreen}
+        options={{
+          title:"hong_zi_woo",
+          headerStyle: { },
+          headerRight: () => (
+            <Ionicons name="ios-add-circle-outline" size={30} color={"#000"} style={{marginRight: 10}}/>
+          )
+        }}
+        />
+    </ProfileStack.Navigator>
+  );
+}
 
 const App = () => {
   return (
-    <>
-    <StatusBar barStyle="dark-content"/>
-    <SafeAreaView>
-      <HomeScreen/>
-    </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <StatusBar barStyle="dark-content"/>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'ios-home-sharp'
+                : 'ios-home-outline';
+            } else if (route.name === 'Discovery') {
+              iconName = focused ? 'search' : 'search-outline';
+            } else if(route.name == 'Post'){
+              iconName = focused ? 'add-circle' : 'add-circle-outline';
+            } else if(route.name == 'Notification'){
+              iconName = focused ? 'heart-sharp' : 'heart-outline';
+            } else if(route.name == 'Profile'){
+              iconName = focused ? 'person-circle' : 'person-circle-outline';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={30} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'black',
+          inactiveTintColor: 'gray',
+          showLabel: false,
+        }}
+      >
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Discovery" component={DiscoveryScreen} />
+        <Tab.Screen name="Post" component={CreatePostScreen} />
+        <Tab.Screen name="Notification" component={NotificationScreen} />
+        <Tab.Screen name="Profile" component={ProfileStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-  },
-  top:{
-    flex:1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  middle:{
-    borderTopColor: '#D9DDDC',
-    borderTopWidth:0.7,
-    flex:9,
-  },
-  bottom:{
-    flex:1,
-    flexDirection: 'row',
-
-  },
-
-  content:{
-    flex:1,
-    height:500,
-    flexDirection: 'column',
-  },
-
-  contentTop:{
-    flex:0.9,
-    flexDirection: 'row',
-  },
-  contentMiddle:{
-    flex:5,
-  },
-  contentBottom:{
-    flex:0.7,
-    flexDirection: 'row',
-  },
-
-  contentBottomIcon:{
-    flex:1,
-    marginVertical:10,
-    width: '100%',
-    resizeMode:'contain',
-  },
-  contentBottomIcon2:{
-    flex:1,
-    marginVertical:10,
-    marginRight:200,
-    width: '100%',
-    resizeMode:'contain',
-  },
-
-
-  logo:{
-    flex:1,
-    marginLeft: 20,
-    width: '100%',
-    height: '50%',
-    resizeMode:'contain',
-  },
-
-  dm:{
-    flex: 1,
-    marginLeft:210,
-    width: '100%',
-    height: '80%',
-    alignItems:'flex-end',
-    resizeMode:'contain',
-  },
-
-  bottomIcon:{
-    flex: 1,
-    resizeMode:'contain',
-    margin:15,
-  },
-
-  userImgSize:{
-    margin:10,
-    flex: 1,
-    width: '100%',
-    resizeMode:'contain',
-  },
-
-  dotImgSize:{
-    margin:18,
-    flex: 1,
-    width: '100%',
-    resizeMode:'contain',
-  },
-
-  contentId:{
-    textAlign: 'justify',
-    lineHeight: 58,
-    marginRight:180,
-    fontSize: 18,
-  }
-
-
-})
 
 export default App;
