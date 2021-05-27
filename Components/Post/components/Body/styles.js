@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
     Image:{
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").width,
+        
     }
 });
 

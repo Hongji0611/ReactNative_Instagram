@@ -18,6 +18,7 @@ import { getFocusedRouteNameFromRoute, NavigationContainer } from '@react-naviga
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from '@react-navigation/stack';
+import { View } from 'native-base';
 
 const Tab = createBottomTabNavigator();
 
@@ -55,12 +56,15 @@ function ProfileStackScreen() {
     <ProfileStack.Navigator>
       <ProfileStack.Screen 
         name="Home" 
-        component={HomeScreen}
+        component={ProfileScreen}
         options={{
           title:"hong_zi_woo",
           headerStyle: { },
           headerRight: () => (
-            <Ionicons name="ios-add-circle-outline" size={30} color={"#000"} style={{marginRight: 10}}/>
+            <View style={{flexDirection: "row",}}>
+              <Ionicons name="ios-add-circle-outline" size={30} color={"#000"} style={{marginRight: 10}}/>
+              <Ionicons name="menu" size={30} color={"#000"} style={{marginRight: 10}}/>
+            </View>
           )
         }}
         />
